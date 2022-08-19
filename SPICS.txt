@@ -1,0 +1,104 @@
+#include <LiquidCrystal.h>
+
+Styles
+
+LiquidCrystal lcd(12,11, 5, 4, 3, 2);
+
+int red 10;
+
+int green = 9; int buzzer = 6;
+
+int GasAO A0;
+
+int trigger-8; int echo=7;
+
+int pirsensor = 13;
+
+int sensorPin = 0; int state = LOW;
+
+int warning = 0; float time, distance;
+
+void setup() {
+
+pinMode(red, OUTPUT);
+
+pinMode(green,OUTPUT); pinMode(buzzer, OUTPUT);
+
+pinMode(GasAO, INPUT); pinMode(trigger, OUTPUT);
+
+pinMode(echo, INPUT); pinMode(pirsensor, INPUT);
+
+Serial.begin(9600); lcd.begin(16,2);
+
+1 void loop() {
+
+lcd.clear(); digitalWrite(trigger, LOW);
+
+delayMicroseconds(5);
+
+delayMicroseconds(10); digitalWrite(trigger, LOW);
+
+digitalWrite(trigger, HIGH); distance time 0.000343/2;
+
+time = pulseIn(echo, HIGH);
+
+distance distance*100; int value digitalRead(psensor);
+
+if (value HIGH)
+
+if (state LOW)
+
+Serial.println("Motion Detected");
+
+lcd.print("Motion Detected");
+
+digitalWrite(buzzer,HIGH);
+
+delay(500);
+}
+digitalWrite(trigger, LOW);
+
+Styles
+
+time = pulseIn(echo, HIGH); distance = time 0.000343/2; distance -distance*100; int value = digitalRead(pirsensor); {
+
+if (value == HIGH)
+
+if (state LOW)
+
+{ Serial.println("Motion Detected"); lcd.print("Motion Detected"); digitalWrite(buzzer,HIGH); delay(500); state = HIGH; if (distance> 100)
+
+{ lcd.setCursor(0,1); lcd.print("Patient near Bed"); Serial.print("Patient near Bed\n"); Serial.print("Distance : "); Serial.print(distance); Serial.println(" cm "); digitalWrite(buzzer, LOW); digitalWrite(red, LOW); digitalWrite(green,HIGH); delay(500); }
+else
+
+Styles
+
+lcd.setCursor(0,1); lcd.print("Patient Escaping"); Serial.println("Patient Escaping "); Serial.print("Distance : "); Serial.print(distance); Serial.println(" cm "); digitalWrite(buzzer, HIGH); digitalWrite(red,HIGH); digitalWrite(green, LOW); delay(1000);}}
+
+else
+
+{
+
+if (state== HIGH)
+
+{ Serial.println("Motion has Stopped"); lcd.print("Motion Stopped"); digitalWrite(buzzer, LOW); delay(500); state = LOW;
+
+float gas = analogRead(sensorPin); Serial.print("Smoke concentration is: "); Serial.println(gas); delay(500); if (gas >=700)
+
+digitalWrite(buzzer, HIGH); digitalWrite(red,HIGH); digitalWrite(green, LOW);}
+
+icd.print("Smoke conc. "); lcd.println(gas); 1cd.setCursor(0,1); lcd.print("Smoke Alert"); delay(500);
+} float gas analogRead(sensorPin); Serial.print("Smoke concentration is: "); Serial.println(gas); delay(500); if (gas >-700)
+
+{ digitalWrite(buzzer, HIGH); digitalWrite(red, HIGH); digitalWrite(green, LOW);}
+
+lcd.print("Smoke conc. "); lcd.println(gas); lcd.setCursor(0,1); lcd.print("Smoke Alert"); delay(500);
+
+}
+
+if (gas <700)
+
+digitalWrite(buzzer, LOW); digitalWrite(red, LOW); digitalWrite(green,HIGH);}
+
+lcd.print("Smoke conc. "); lcd.println(gas); lcd.setCursor(0,1); lcd.print("Ambient"); delay(500);
+}}}}
